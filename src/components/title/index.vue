@@ -1,41 +1,24 @@
 <template>
   <div>
     <text class="title">Mobox Tools</text>
-    <text @click="requestAccount" v-if="myAccount === ''">Connect</text>
+    <text @click="connect" v-if="activeAccount === ''">Connect</text>
     <text class="address" v-else>{{ showAddress }}</text>
   </div>
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   name: "TitleView",
-  created() {
-    this.requestAccount();
-  },
-  data() {
+  setup() {
+    const store = useStore();
+    store.dispatch("accounts/connect");
     return {
-      myAccount: "",
+      connect: () => store.dispatch("accounts/connect"),
+      showAddress: computed(() => store.getters["accounts/showAddress"]),
+      activeAccount: computed(() => store.getters["accounts/activeAccount"]),
     };
-  },
-  methods: {
-    async requestAccount() {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      this.myAccount = accounts[0];
-    },
-  },
-  computed: {
-    showAddress() {
-      console.log(this.myAccount);
-      if (this.myAccount === "") {
-        return "";
-      } else {
-        return (
-          this.myAccount.substring(0, 8) + "...." + this.myAccount.substring(36)
-        );
-      }
-    },
   },
 };
 </script>
