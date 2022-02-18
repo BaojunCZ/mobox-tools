@@ -6,9 +6,9 @@ export default {
     ...mapState("momoMysteryBox", [
       "momoBox",
       "mecBox",
-      "modelVisible",
-      "modelType",
-      "modelInput",
+      "modalVisible",
+      "modalType",
+      "modalInput",
     ]),
     momoBoxSizeText() {
       if (this.momoBox) {
@@ -24,41 +24,41 @@ export default {
         return "x" + "0";
       }
     },
-    modelImage() {
-      if (this.modelType === 1) {
+    modalImage() {
+      if (this.modalType === 1) {
         return "/images/ic_momo_box.png";
-      } else if (this.modelType === 2) {
+      } else if (this.modalType === 2) {
         return "/images/ic_mec_box.png";
       }
     },
-    modelBoxName() {
-      if (this.modelType === 1) {
+    modalBoxName() {
+      if (this.modalType === 1) {
         return "MomoBox";
-      } else if (this.modelType === 2) {
+      } else if (this.modalType === 2) {
         return "MecBox";
       }
     },
-    modelBoxSize() {
-      if (this.modelType === 1) {
+    modalBoxSize() {
+      if (this.modalType === 1) {
         return this.momoBox;
-      } else if (this.modelType === 2) {
+      } else if (this.modalType === 2) {
         return this.mecBox;
       }
     },
-    modelSizeInput: {
+    modalSizeInput: {
       get() {
-        return this.modelInput;
+        return this.modalInput;
       },
       set(value) {
-        this.$store.commit("momoMysteryBox/updateModelInput", value);
+        this.$store.commit("momoMysteryBox/updateModalInput", value);
       },
     },
   },
   methods: {
     ...mapActions("momoMysteryBox", [
       "balanceOfAll",
-      "openModel",
-      "closeModel",
+      "openModal",
+      "closeModal",
     ]),
   },
 };

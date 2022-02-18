@@ -9,7 +9,7 @@
         <a @click="balanceOfAll" :style="{ fontSize: '20px' }">Update</a>
       </template>
       <div class="content">
-        <a-card hoverable style="width: 240px" @click="openModel(1)">
+        <a-card hoverable style="width: 240px" @click="openModal(1)">
           <div class="card">
             <img src="/images/ic_momo_box.png" />
             <text>Momo Box</text>
@@ -19,7 +19,7 @@
         <a-card
           hoverable
           :style="{ width: '240px', marginLeft: '20px' }"
-          @click="openModel(2)"
+          @click="openModal(2)"
         >
           <div class="card">
             <img src="/images/ic_mec_box.png" />
@@ -30,19 +30,19 @@
       </div>
     </a-card>
     <a-modal
-      v-model:visible="modelVisible"
+      v-model:visible="modalVisible"
       title="Transfer"
-      @cancel="closeModel"
+      @cancel="closeModal"
       width="300px"
     >
       <div class="card">
-        <img :src="modelImage" />
-        <text>{{ modelBoxName }}</text>
+        <img :src="modalImage" />
+        <text>{{ modalBoxName }}</text>
         <a-input-number
           id="inputNumber"
-          v-model:value="modelSizeInput"
-          :min="0"
-          :max="modelBoxSize"
+          v-model:value="modalSizeInput"
+          :min="1"
+          :max="modalBoxSize"
         />
       </div>
     </a-modal>

@@ -5,9 +5,9 @@ const momoMysteryBox = {
   state: () => ({
     momoBox: 0,
     mecBox: 0,
-    modelVisible: false,
-    modelType: 1,
-    modelInput: 0,
+    modalVisible: false,
+    modalType: 1,
+    modalInput: 1,
   }),
   mutations: {
     updateMomoBox(state, size) {
@@ -16,14 +16,14 @@ const momoMysteryBox = {
     updateMecBox(state, size) {
       state.mecBox = size;
     },
-    updatemodelVisible(state, visble) {
-      state.modelVisible = visble;
+    updatemodalVisible(state, visble) {
+      state.modalVisible = visble;
     },
-    updateModelType(state, type) {
-      state.modelType = type;
+    updatemodalType(state, type) {
+      state.modalType = type;
     },
-    updateModelInput(state, input) {
-      state.modelInput = input;
+    updateModalInput(state, input) {
+      state.modalInput = input;
     },
   },
   actions: {
@@ -36,18 +36,22 @@ const momoMysteryBox = {
         console.error(e);
       }
     },
-    openModel({ commit, state }, type) {
-      commit("updateModelType", type);
-      commit("updatemodelVisible", true);
+    openModal({ commit, state }, type) {
+      var size = 0;
       if (type === 1) {
-        commit("updateModelInput", state.momoBox);
+        size = state.momoBox;
       } else if (type === 2) {
-        commit("updateModelInput", state.mecBox);
+        size = state.mecBox;
+      }
+      if (size > 0) {
+        commit("updatemodalType", type);
+        commit("updatemodalVisible", true);
+        commit("updateModalInput", size);
       }
     },
-    closeModel({ commit }) {
-      commit("updatemodelVisible", false);
-      commit("updateModelInput", 0);
+    closeModal({ commit }) {
+      commit("updatemodalVisible", false);
+      commit("updateModalInput", 0);
     },
   },
   getters: {},
