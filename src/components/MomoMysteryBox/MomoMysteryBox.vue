@@ -9,22 +9,43 @@
         <a @click="balanceOfAll" :style="{ fontSize: '20px' }">Update</a>
       </template>
       <div class="content">
-        <a-card hoverable style="width: 240px">
-          <div>
-            <img src="../../assets/ic_momo_box.png" />
+        <a-card hoverable style="width: 240px" @click="openModel(1)">
+          <div class="card">
+            <img src="/images/ic_momo_box.png" />
             <text>Momo Box</text>
             <text>{{ momoBoxSizeText }}</text>
           </div>
         </a-card>
-        <a-card hoverable :style="{ width: '240px', marginLeft: '20px' }">
-          <div>
-            <img src="../../assets/ic_mec_box.png" />
+        <a-card
+          hoverable
+          :style="{ width: '240px', marginLeft: '20px' }"
+          @click="openModel(2)"
+        >
+          <div class="card">
+            <img src="/images/ic_mec_box.png" />
             <text>Mec Box</text>
             <text>{{ mecBoxSizeText }}</text>
           </div>
         </a-card>
       </div>
     </a-card>
+    <a-modal
+      v-model:visible="modelVisible"
+      title="Transfer"
+      @cancel="closeModel"
+      width="300px"
+    >
+      <div class="card">
+        <img :src="modelImage" />
+        <text>{{ modelBoxName }}</text>
+        <a-input-number
+          id="inputNumber"
+          v-model:value="modelSizeInput"
+          :min="0"
+          :max="modelBoxSize"
+        />
+      </div>
+    </a-modal>
   </div>
 </template>
 <script src="./index.js" />
@@ -38,7 +59,7 @@
   display: flex;
   justify-content: sp;
 }
-.content div {
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;

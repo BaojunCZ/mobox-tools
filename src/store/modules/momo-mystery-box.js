@@ -5,6 +5,9 @@ const momoMysteryBox = {
   state: () => ({
     momoBox: 0,
     mecBox: 0,
+    modelVisible: false,
+    modelType: 1,
+    modelInput: 0,
   }),
   mutations: {
     updateMomoBox(state, size) {
@@ -12,6 +15,15 @@ const momoMysteryBox = {
     },
     updateMecBox(state, size) {
       state.mecBox = size;
+    },
+    updatemodelVisible(state, visble) {
+      state.modelVisible = visble;
+    },
+    updateModelType(state, type) {
+      state.modelType = type;
+    },
+    updateModelInput(state, input) {
+      state.modelInput = input;
     },
   },
   actions: {
@@ -23,6 +35,19 @@ const momoMysteryBox = {
       } catch (e) {
         console.error(e);
       }
+    },
+    openModel({ commit, state }, type) {
+      commit("updateModelType", type);
+      commit("updatemodelVisible", true);
+      if (type === 1) {
+        commit("updateModelInput", state.momoBox);
+      } else if (type === 2) {
+        commit("updateModelInput", state.mecBox);
+      }
+    },
+    closeModel({ commit }) {
+      commit("updatemodelVisible", false);
+      commit("updateModelInput", 0);
     },
   },
   getters: {},
