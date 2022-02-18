@@ -10,6 +10,11 @@ export default {
   components: {
     Home,
   },
+  created() {
+    window.ethereum.on("accountsChanged", (accounts) => {
+      this.$store.dispatch("accounts/connect", accounts);
+    });
+  },
 };
 </script>
 

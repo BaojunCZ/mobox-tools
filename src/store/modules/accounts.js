@@ -1,3 +1,5 @@
+import { momoMysteryBoxManager } from "@/utils/momo-mystery-box-manager";
+
 const accounts = {
   namespaced: true,
   state: () => ({
@@ -9,11 +11,15 @@ const accounts = {
     },
   },
   actions: {
-    async connect({ commit }) {
+    async connect({ commit, dispatch }) {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      commit("updateAccounts", accounts);
+      if (accounts.length > 0) {
+        commit("updateAccounts", accounts);
+        momoMysteryBoxManager.setAddress(accounts[0]);
+        dispatch("momoMysteryBox/balanceOfAll", "", { root: true });
+      }
     },
   },
   getters: {
