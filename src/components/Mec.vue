@@ -51,12 +51,8 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "MecView",
   computed: {
-    ...mapState("mec", [
-      "mec",
-      "modalVisible",
-      "modalInput",
-      "modalTargetAddress",
-    ]),
+    ...mapState("mec", ["mec", "modalVisible", "modalInput"]),
+    ...mapState("accounts", ["targetAddress"]),
     mecSizeText() {
       if (this.mec) {
         return "x" + this.mec;
@@ -74,10 +70,10 @@ export default {
     },
     targetAddressInput: {
       get() {
-        return this.modalTargetAddress;
+        return this.targetAddress;
       },
       set(value) {
-        this.$store.commit("mec/updateModalTargetAddress", value);
+        this.$store.commit("accounts/updateTargetAddress", value);
       },
     },
   },

@@ -6,7 +6,6 @@ const mec = {
     mec: 0,
     modalVisible: false,
     modalInput: 1,
-    modalTargetAddress: "",
   }),
   mutations: {
     updateMec(state, mec) {
@@ -17,9 +16,6 @@ const mec = {
     },
     updateModalInput(state, input) {
       state.modalInput = input;
-    },
-    updateModalTargetAddress(state, address) {
-      state.modalTargetAddress = address;
     },
   },
   actions: {
@@ -40,12 +36,12 @@ const mec = {
     closeModal({ commit }) {
       commit("updatemodalVisible", false);
       commit("updateModalInput", 0);
-      commit("updateModalTargetAddress", "");
     },
-    async transfer({ state, dispatch }) {
+    async transfer({ state, dispatch, rootState }) {
       try {
-        if (state.modalTargetAddress && state.modalInput) {
-          await mecManager.transfer(state.modalTargetAddress, state.modalInput);
+        const targetAddress = rootState["accounts/targetAddress"];
+        if (targetAddress && state.modalInput) {
+          await mecManager.transfer(targetAddress, state.modalInput);
           dispatch("closeModal");
         }
       } catch (e) {

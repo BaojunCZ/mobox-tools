@@ -5,10 +5,14 @@ const accounts = {
   namespaced: true,
   state: () => ({
     accounts: [],
+    targetAddress: "",
   }),
   mutations: {
     updateAccounts(state, accounts) {
       state.accounts = accounts;
+    },
+    updateTargetAddress(state, address) {
+      state.targetAddress = address;
     },
   },
   actions: {
