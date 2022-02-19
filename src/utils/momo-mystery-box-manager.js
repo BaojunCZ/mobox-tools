@@ -1,36 +1,23 @@
-import { MomoMysteryBox } from "@/constants";
-import { Erc1155 } from "@/contract/erc1155/erc1155";
+import { MomoMysteryBoxContract } from "@/constants";
+import { ERC1155Manager } from "./erc1155-manager";
 
 const MomoBox = 1;
 const MecBox = 2;
-class MomoMysteryBoxManager {
+class MomoMysteryBoxManager extends ERC1155Manager {
   constructor() {
-    this.erc1155 = new Erc1155(MomoMysteryBox);
-  }
-
-  setAddress(address) {
-    this.address = address;
+    super(MomoMysteryBoxContract);
   }
 
   balanceOfMecBox() {
-    if (this.address) {
-      return this.erc1155.balanceOf(this.address, MecBox);
-    }
+    return this.balanceOf(MecBox);
   }
 
   balanceOfMomoBox() {
-    if (this.address) {
-      return this.erc1155.balanceOf(this.address, MomoBox);
-    }
+    return this.balanceOf(MomoBox);
   }
 
   balanceOfAll() {
-    if (this.address) {
-      return this.erc1155.balanceOfBatch(
-        [this.address, this.address],
-        [MomoBox, MecBox]
-      );
-    }
+    return this.balanceOfBatch([MomoBox, MecBox]);
   }
 }
 

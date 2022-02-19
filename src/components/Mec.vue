@@ -1,26 +1,19 @@
 <template>
   <div :style="{ marginTop: '30px' }">
     <a-card
-      title="Box"
+      title="Crystal"
       style="width: 490px"
       :headStyle="{ fontSize: '35px', fontWeight: '500' }"
     >
       <template #extra>
-        <a @click="balanceOfAll" :style="{ fontSize: '20px' }">Update</a>
+        <a @click="balanceOf" :style="{ fontSize: '20px' }">Update</a>
       </template>
       <div class="content">
-        <a-card hoverable @click="openModal(1)">
+        <a-card hoverable @click="openModal()">
           <div class="card">
-            <img src="/images/ic_momo_box.png" />
-            <text>Momo Box</text>
-            <text>{{ momoBoxSizeText }}</text>
-          </div>
-        </a-card>
-        <a-card hoverable :style="{ marginLeft: '20px' }" @click="openModal(2)">
-          <div class="card">
-            <img src="/images/ic_mec_box.png" />
-            <text>Mec Box</text>
-            <text>{{ mecBoxSizeText }}</text>
+            <img src="/images/ic_mec.png" />
+            <text>Mec</text>
+            <text>{{ mecSizeText }}</text>
           </div>
         </a-card>
       </div>
@@ -32,19 +25,45 @@
       width="300px"
     >
       <div class="card">
-        <img :src="modalImage" />
-        <text>{{ modalBoxName }}</text>
+        <img src="/images/ic_momo_box.png" />
+        <text>Mec</text>
         <a-input-number
           id="inputNumber"
           v-model:value="modalSizeInput"
           :min="1"
-          :max="modalBoxSize"
+          :max="mec"
         />
       </div>
     </a-modal>
   </div>
 </template>
-<script src="./index.js" />
+<script>
+import { mapActions, mapState } from "vuex";
+export default {
+  name: "MecView",
+  computed: {
+    ...mapState("mec", ["mec", "modalVisible", "modalInput"]),
+    mecSizeText() {
+      if (this.mec) {
+        return "x" + this.mec;
+      } else {
+        return "x" + "0";
+      }
+    },
+    modalSizeInput: {
+      get() {
+        return this.modalInput;
+      },
+      set(value) {
+        this.$store.commit("mec/updateModalInput", value);
+      },
+    },
+  },
+  methods: {
+    ...mapActions("mec", ["balanceOf", "openModal", "closeModal"]),
+  },
+};
+</script>
 <style scoped>
 .title {
   font-size: 25px;

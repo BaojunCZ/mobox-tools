@@ -1,3 +1,4 @@
+import { mecManager } from "@/utils/mec-manager";
 import { momoMysteryBoxManager } from "@/utils/momo-mystery-box-manager";
 
 const accounts = {
@@ -18,7 +19,9 @@ const accounts = {
       if (accounts.length > 0) {
         commit("updateAccounts", accounts);
         momoMysteryBoxManager.setAddress(accounts[0]);
+        mecManager.setAddress(accounts[0]);
         dispatch("momoMysteryBox/balanceOfAll", "", { root: true });
+        dispatch("mec/balanceOf", "", { root: true });
       }
     },
   },
