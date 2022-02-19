@@ -20,4 +20,10 @@ export class ERC1155Manager {
       return this.erc1155.balanceOfBatch([this.address, this.address], ids);
     }
   }
+
+  safeTransferFrom(to, id, amount) {
+    if (this.address) {
+      return this.erc1155.safeTransferFrom(this.address, to, id, amount, "0x");
+    }
+  }
 }

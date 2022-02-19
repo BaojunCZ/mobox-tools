@@ -22,16 +22,25 @@
       v-model:visible="modalVisible"
       title="Transfer"
       @cancel="closeModal"
+      @ok="transfer"
       width="300px"
+      okText="Transfer"
+      cancelText="Close"
     >
       <div class="card">
         <img src="/images/ic_momo_box.png" />
         <text>Mec</text>
         <a-input-number
           id="inputNumber"
+          :style="{ marginTop: '5px' }"
           v-model:value="modalSizeInput"
           :min="1"
           :max="mec"
+        />
+        <a-input
+          :style="{ marginTop: '10px' }"
+          v-model:value="targetAddressInput"
+          placeholder="Target Address"
         />
       </div>
     </a-modal>
@@ -42,7 +51,12 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "MecView",
   computed: {
-    ...mapState("mec", ["mec", "modalVisible", "modalInput"]),
+    ...mapState("mec", [
+      "mec",
+      "modalVisible",
+      "modalInput",
+      "modalTargetAddress",
+    ]),
     mecSizeText() {
       if (this.mec) {
         return "x" + this.mec;
@@ -58,9 +72,17 @@ export default {
         this.$store.commit("mec/updateModalInput", value);
       },
     },
+    targetAddressInput: {
+      get() {
+        return this.modalTargetAddress;
+      },
+      set(value) {
+        this.$store.commit("mec/updateModalTargetAddress", value);
+      },
+    },
   },
   methods: {
-    ...mapActions("mec", ["balanceOf", "openModal", "closeModal"]),
+    ...mapActions("mec", ["balanceOf", "openModal", "closeModal", "transfer"]),
   },
 };
 </script>

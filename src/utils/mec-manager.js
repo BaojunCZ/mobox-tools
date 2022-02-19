@@ -11,6 +11,10 @@ class MecManager extends ERC1155Manager {
   balanceOfMec() {
     return this.balanceOf(Mec);
   }
+
+  transfer(to, amount) {
+    return this.safeTransferFrom(to, Mec, amount);
+  }
 }
 
 export const mecManager = new MecManager();
