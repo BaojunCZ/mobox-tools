@@ -18,38 +18,27 @@
         </a-card>
       </div>
     </a-card>
-    <a-modal
-      v-model:visible="modalVisible"
-      title="Transfer"
-      @cancel="closeModal"
-      @ok="transfer"
-      width="300px"
-      okText="Transfer"
-      cancelText="Close"
-    >
-      <div class="card">
-        <img src="/images/ic_momo_box.png" />
-        <text>Mec</text>
-        <a-input-number
-          id="inputNumber"
-          :style="{ marginTop: '5px' }"
-          v-model:value="modalSizeInput"
-          :min="1"
-          :max="mec"
-        />
-        <a-input
-          :style="{ marginTop: '10px' }"
-          v-model:value="targetAddressInput"
-          placeholder="Target Address"
-        />
-      </div>
-    </a-modal>
+    <box-mec-modal
+      img="/images/ic_mec.png"
+      text="Transfer"
+      v-model:visible="visible"
+      v-model:address="address"
+      v-model:amount="amount"
+      :min="1"
+      :max="mec"
+      @closeModal="closeModal"
+      @transfer="transfer"
+    />
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import BoxMecModal from "./BoxMecTransferModal.vue";
 export default {
   name: "MecView",
+  components: {
+    BoxMecModal,
+  },
   computed: {
     ...mapState("mec", ["mec", "modalVisible", "modalInput"]),
     ...mapState("accounts", ["targetAddress"]),
@@ -60,7 +49,15 @@ export default {
         return "x" + "0";
       }
     },
-    modalSizeInput: {
+    visible: {
+      get() {
+        return this.modalVisible;
+      },
+      set(value) {
+        this.$store.commit("mec/updateModalVisible", value);
+      },
+    },
+    amount: {
       get() {
         return this.modalInput;
       },
@@ -68,7 +65,7 @@ export default {
         this.$store.commit("mec/updateModalInput", value);
       },
     },
-    targetAddressInput: {
+    address: {
       get() {
         return this.targetAddress;
       },

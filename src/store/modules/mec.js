@@ -11,7 +11,7 @@ const mec = {
     updateMec(state, mec) {
       state.mec = mec;
     },
-    updatemodalVisible(state, visble) {
+    updateModalVisible(state, visble) {
       state.modalVisible = visble;
     },
     updateModalInput(state, input) {
@@ -29,17 +29,16 @@ const mec = {
     },
     openModal({ commit, state }) {
       if (state.mec > 0) {
-        commit("updatemodalVisible", true);
+        commit("updateModalVisible", true);
         commit("updateModalInput", state.mec);
       }
     },
     closeModal({ commit }) {
-      commit("updatemodalVisible", false);
       commit("updateModalInput", 0);
     },
     async transfer({ state, dispatch, rootState }) {
       try {
-        const targetAddress = rootState["accounts/targetAddress"];
+        const targetAddress = rootState.accounts.targetAddress;
         if (targetAddress && state.modalInput) {
           await mecManager.transfer(targetAddress, state.modalInput);
           dispatch("closeModal");
