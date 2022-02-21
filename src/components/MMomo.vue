@@ -1,11 +1,11 @@
 <template>
   <a-card
-    title="Momo"
-    style="width: 490px"
+    title="MOMO M Token"
     :headStyle="{ fontSize: '35px', fontWeight: '500' }"
+    :style="{ marginTop: '30px', width: '490px' }"
   >
     <div class="content">
-      <a-card title="M Token">
+      <a-card>
         <div class="card">
           <a-input
             :style="{ marginTop: '10px' }"
@@ -13,15 +13,15 @@
             placeholder="IDs"
           />
           <a-button :style="{ marginTop: '10px' }" type="primary" @click="query"
-            >Query
-          </a-button>
+            >Query</a-button
+          >
           <text :style="{ marginTop: '10px' }">{{ queryResult }}</text>
           <a-button
             :style="{ marginTop: '10px' }"
             type="primary"
             @click="transfer"
-            >Transfer
-          </a-button>
+            >Transfer</a-button
+          >
         </div>
       </a-card>
     </div>
@@ -31,7 +31,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  name: "TransferMomo",
+  name: "MMomo",
   computed: {
     ...mapState("mMomo", ["ids", "queryResult"]),
     inputIds: {

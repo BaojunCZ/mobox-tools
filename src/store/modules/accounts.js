@@ -1,6 +1,7 @@
 import { mMomoManager } from "@/utils/m-momo-manager";
 import { mecManager } from "@/utils/mec-manager";
 import { momoMysteryBoxManager } from "@/utils/momo-mystery-box-manager";
+import { rareMomoManager } from "@/utils/rare-momo-manager";
 
 const accounts = {
   namespaced: true,
@@ -26,6 +27,7 @@ const accounts = {
         momoMysteryBoxManager.setAddress(accounts[0]);
         mecManager.setAddress(accounts[0]);
         mMomoManager.setAddress(accounts[0]);
+        rareMomoManager.setAddress(accounts[0]);
         dispatch("momoMysteryBox/balanceOfAll", "", { root: true });
         dispatch("mec/balanceOf", "", { root: true });
       }

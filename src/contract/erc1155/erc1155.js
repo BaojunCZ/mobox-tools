@@ -1,4 +1,5 @@
 import { provider } from "@/constants";
+import { sendTransaction } from "@/utils/metamask-utils";
 import { ethers } from "ethers";
 import abi from "./abi";
 export class Erc1155 {
@@ -16,45 +17,22 @@ export class Erc1155 {
   }
 
   async safeTransferFrom(from, to, id, amount, data) {
-    const fragment = this.contract.interface.getFunction("safeTransferFrom");
-    const payload = this.contract.interface.encodeFunctionData(fragment, [
+    await sendTransaction(
+      this.contract.interface,
+      "safeTransferFrom",
+      [from, to, id, amount, data],
       from,
-      to,
-      id,
-      amount,
-      data,
-    ]);
-    const transactionParameters = {
-      to: this.address,
-      from: from,
-      data: payload,
-    };
-    return await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
+      this.address
+    );
   }
 
   async safeBatchTransferFrom(from, to, ids, amounts, data) {
-    console.log(from, to, ids, amounts, data);
-    const fragment = this.contract.interface.getFunction(
-      "safeBatchTransferFrom"
-    );
-    const payload = this.contract.interface.encodeFunctionData(fragment, [
+    await sendTransaction(
+      this.contract.interface,
+      "safeBatchTransferFrom",
+      [from, to, ids, amounts, data],
       from,
-      to,
-      ids,
-      amounts,
-      data,
-    ]);
-    const transactionParameters = {
-      to: this.address,
-      from: from,
-      data: payload,
-    };
-    return await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
+      this.address
+    );
   }
 }

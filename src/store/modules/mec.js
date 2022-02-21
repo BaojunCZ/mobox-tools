@@ -35,6 +35,7 @@ const mec = {
     },
     closeModal({ commit }) {
       commit("updateModalInput", 0);
+      commit("updateModalVisible", false);
     },
     async transfer({ state, dispatch, rootState }) {
       try {

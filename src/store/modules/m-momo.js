@@ -32,7 +32,6 @@ const mMomo = {
     },
     async transfer({ getters, state, rootState }) {
       try {
-        console.log("transfer");
         const idList = getters.idList;
         const queryResult = state.queryResult;
         const ids = [];
@@ -44,10 +43,11 @@ const mMomo = {
           }
         });
         const targetAddress = rootState.accounts.targetAddress;
-        console.log(targetAddress, ids, amounts);
         if (
-          (targetAddress,
-          ids.length > 0 && amounts.length > 0 && ids.length === amounts.length)
+          targetAddress &&
+          ids.length > 0 &&
+          amounts.length > 0 &&
+          ids.length === amounts.length
         ) {
           await mMomoManager.transferBatch(targetAddress, ids, amounts);
         }
@@ -58,9 +58,8 @@ const mMomo = {
   },
   getters: {
     idList(state) {
-      console.log(state.ids);
       if (state.ids) {
-        return state.ids.split(",");
+        return state.ids.split(" ");
       } else {
         return null;
       }

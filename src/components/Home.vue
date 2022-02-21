@@ -2,7 +2,8 @@
   <div>
     <title-view />
     <target-address />
-    <transfer-momo />
+    <m-momo />
+    <rare-momo />
     <momo-mystery-box />
     <mec-view />
   </div>
@@ -13,7 +14,8 @@ import TitleView from "./Title.vue";
 import MomoMysteryBox from "./MomoMysteryBox/MomoMysteryBox.vue";
 import MecView from "./Mec.vue";
 import TargetAddress from "./TargetAddress.vue";
-import TransferMomo from "./TransferMomo.vue";
+import MMomo from "./MMomo.vue";
+import RareMomo from "./RareMomo.vue";
 export default {
   name: "HomeView",
   components: {
@@ -21,7 +23,8 @@ export default {
     MomoMysteryBox,
     MecView,
     TargetAddress,
-    TransferMomo,
+    MMomo,
+    RareMomo,
   },
 };
 </script>
