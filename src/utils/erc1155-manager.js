@@ -17,13 +17,29 @@ export class ERC1155Manager {
 
   balanceOfBatch(ids) {
     if (this.address) {
-      return this.erc1155.balanceOfBatch([this.address, this.address], ids);
+      const addresses = [];
+      ids.forEach(() => {
+        addresses.push(this.address);
+      });
+      return this.erc1155.balanceOfBatch(addresses, ids);
     }
   }
 
   safeTransferFrom(to, id, amount) {
     if (this.address) {
       return this.erc1155.safeTransferFrom(this.address, to, id, amount, "0x");
+    }
+  }
+
+  safeBatchTransferFrom(to, ids, amounts) {
+    if (this.address) {
+      return this.erc1155.safeBatchTransferFrom(
+        this.address,
+        to,
+        ids,
+        amounts,
+        "0x"
+      );
     }
   }
 }

@@ -34,4 +34,27 @@ export class Erc1155 {
       params: [transactionParameters],
     });
   }
+
+  async safeBatchTransferFrom(from, to, ids, amounts, data) {
+    console.log(from, to, ids, amounts, data);
+    const fragment = this.contract.interface.getFunction(
+      "safeBatchTransferFrom"
+    );
+    const payload = this.contract.interface.encodeFunctionData(fragment, [
+      from,
+      to,
+      ids,
+      amounts,
+      data,
+    ]);
+    const transactionParameters = {
+      to: this.address,
+      from: from,
+      data: payload,
+    };
+    return await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+  }
 }
