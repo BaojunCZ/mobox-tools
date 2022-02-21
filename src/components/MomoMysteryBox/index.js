@@ -1,7 +1,11 @@
 import { mapActions, mapState } from "vuex";
+import BoxMecModal from "../BoxMecTransferModal.vue";
 
 export default {
   name: "MomoMysteryBox",
+  components: {
+    BoxMecModal,
+  },
   computed: {
     ...mapState("momoMysteryBox", [
       "momoBox",
@@ -10,6 +14,7 @@ export default {
       "modalType",
       "modalInput",
     ]),
+    ...mapState("accounts", ["targetAddress"]),
     momoBoxSizeText() {
       if (this.momoBox) {
         return "x" + this.momoBox;
@@ -45,12 +50,28 @@ export default {
         return this.mecBox;
       }
     },
-    modalSizeInput: {
+    visible: {
+      get() {
+        return this.modalVisible;
+      },
+      set(value) {
+        this.$store.commit("momoMysteryBox/updateModalVisible", value);
+      },
+    },
+    amount: {
       get() {
         return this.modalInput;
       },
       set(value) {
         this.$store.commit("momoMysteryBox/updateModalInput", value);
+      },
+    },
+    address: {
+      get() {
+        return this.targetAddress;
+      },
+      set(value) {
+        this.$store.commit("accounts/updateTargetAddress", value);
       },
     },
   },
@@ -59,6 +80,7 @@ export default {
       "balanceOfAll",
       "openModal",
       "closeModal",
+      "transfer",
     ]),
   },
 };

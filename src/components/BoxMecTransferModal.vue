@@ -84,4 +84,8 @@ export default {
   align-items: center;
   padding: 10px 30px;
 }
+img {
+  width: 100px;
+  height: 100px;
+}
 </style>

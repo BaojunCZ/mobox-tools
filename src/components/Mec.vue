@@ -20,7 +20,7 @@
     </a-card>
     <box-mec-modal
       img="/images/ic_mec.png"
-      text="Transfer"
+      text="Mec"
       v-model:visible="visible"
       v-model:address="address"
       v-model:amount="amount"

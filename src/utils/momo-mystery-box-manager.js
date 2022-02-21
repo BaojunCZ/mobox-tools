@@ -19,6 +19,10 @@ class MomoMysteryBoxManager extends ERC1155Manager {
   balanceOfAll() {
     return this.balanceOfBatch([MomoBox, MecBox]);
   }
+
+  transfer(to, type, amount) {
+    return this.safeTransferFrom(to, type, amount);
+  }
 }
 
 export const momoMysteryBoxManager = new MomoMysteryBoxManager();

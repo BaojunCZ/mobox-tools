@@ -16,10 +16,10 @@ const momoMysteryBox = {
     updateMecBox(state, size) {
       state.mecBox = size;
     },
-    updatemodalVisible(state, visble) {
+    updateModalVisible(state, visble) {
       state.modalVisible = visble;
     },
-    updatemodalType(state, type) {
+    updateModalType(state, type) {
       state.modalType = type;
     },
     updateModalInput(state, input) {
@@ -44,14 +44,29 @@ const momoMysteryBox = {
         size = state.mecBox;
       }
       if (size > 0) {
-        commit("updatemodalType", type);
-        commit("updatemodalVisible", true);
+        commit("updateModalType", type);
+        commit("updateModalVisible", true);
         commit("updateModalInput", size);
       }
     },
     closeModal({ commit }) {
-      commit("updatemodalVisible", false);
+      commit("updateModalVisible", false);
       commit("updateModalInput", 0);
+    },
+    async transfer({ state, dispatch, rootState }) {
+      try {
+        const targetAddress = rootState.accounts.targetAddress;
+        if (targetAddress && state.modalInput && state.modalType) {
+          await momoMysteryBoxManager.transfer(
+            targetAddress,
+            state.modalType,
+            state.modalInput
+          );
+          dispatch("closeModal");
+        }
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
   getters: {},

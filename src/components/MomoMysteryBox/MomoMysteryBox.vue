@@ -25,23 +25,17 @@
         </a-card>
       </div>
     </a-card>
-    <a-modal
-      v-model:visible="modalVisible"
-      title="Transfer"
-      @cancel="closeModal"
-      width="300px"
-    >
-      <div class="card">
-        <img :src="modalImage" />
-        <text>{{ modalBoxName }}</text>
-        <a-input-number
-          id="inputNumber"
-          v-model:value="modalSizeInput"
-          :min="1"
-          :max="modalBoxSize"
-        />
-      </div>
-    </a-modal>
+    <box-mec-modal
+      :img="modalImage"
+      :text="modalBoxName"
+      v-model:visible="visible"
+      v-model:address="address"
+      v-model:amount="amount"
+      :min="1"
+      :max="modalBoxSize"
+      @closeModal="closeModal"
+      @transfer="transfer"
+    />
   </div>
 </template>
 <script src="./index.js" />
