@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div class="content">
     <title-view />
     <target-address />
-    <m-momo />
-    <rare-momo />
-    <momo-mystery-box />
-    <mec-view />
+    <div class="block">
+      <m-momo />
+      <rare-momo :style="{ marginLeft: '30px' }" />
+      <gem-view :style="{ marginLeft: '30px' }" />
+    </div>
+    <div class="block">
+      <momo-mystery-box />
+      <mec-view :style="{ marginLeft: '30px' }" />
+    </div>
   </div>
 </template>
 
@@ -16,6 +21,7 @@ import MecView from "./Mec.vue";
 import TargetAddress from "./TargetAddress.vue";
 import MMomo from "./MMomo.vue";
 import RareMomo from "./RareMomo.vue";
+import GemView from "./Gem.vue";
 export default {
   name: "HomeView",
   components: {
@@ -25,8 +31,19 @@ export default {
     TargetAddress,
     MMomo,
     RareMomo,
+    GemView,
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+</style>

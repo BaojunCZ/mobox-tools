@@ -2,7 +2,7 @@
   <a-card
     title="MOMO Token"
     :headStyle="{ fontSize: '35px', fontWeight: '500' }"
-    :style="{ marginTop: '30px', width: '490px' }"
+    :style="{ marginTop: '30px', width: '320px' }"
   >
     <div class="content">
       <a-card>

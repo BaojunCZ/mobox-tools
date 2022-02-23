@@ -1,21 +1,24 @@
 <template>
   <a-card
-    title="MOMO M Token"
+    title="Gem"
     :headStyle="{ fontSize: '35px', fontWeight: '500' }"
     :style="{ marginTop: '30px', width: '320px' }"
   >
     <div class="content">
       <a-card>
         <div class="card">
+          <a-button
+            :style="{ marginTop: '10px' }"
+            type="primary"
+            @click="balanceOfAll"
+            >Query</a-button
+          >
+          <text>{{ gems }}</text>
           <a-input
             :style="{ marginTop: '10px' }"
             v-model:value="inputIds"
             placeholder="IDs"
           />
-          <a-button :style="{ marginTop: '10px' }" type="primary" @click="query"
-            >Query</a-button
-          >
-          <text :style="{ marginTop: '10px' }">{{ queryResult }}</text>
           <a-button
             :style="{ marginTop: '10px' }"
             type="primary"
@@ -29,22 +32,22 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "MMomo",
+  name: "GemView",
   computed: {
-    ...mapState("mMomo", ["ids", "queryResult"]),
+    ...mapState("gem", ["ids", "gems"]),
     inputIds: {
       get() {
         return this.ids;
       },
       set(value) {
-        this.$store.commit("mMomo/updateIds", value);
+        this.$store.commit("gem/updateIds", value);
       },
     },
   },
   methods: {
-    ...mapActions("mMomo", ["query", "transfer"]),
+    ...mapActions("gem", ["balanceOfAll", "transfer"]),
   },
 };
 </script>

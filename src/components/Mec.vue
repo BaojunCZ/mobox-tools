@@ -2,7 +2,7 @@
   <div :style="{ marginTop: '30px' }">
     <a-card
       title="Crystal"
-      style="width: 490px"
+      style="width: 320px"
       :headStyle="{ fontSize: '35px', fontWeight: '500' }"
     >
       <template #extra>

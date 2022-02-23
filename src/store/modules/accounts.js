@@ -1,3 +1,4 @@
+import { gemManager } from "@/utils/gem-manager";
 import { mMomoManager } from "@/utils/m-momo-manager";
 import { mecManager } from "@/utils/mec-manager";
 import { momoMysteryBoxManager } from "@/utils/momo-mystery-box-manager";
@@ -28,6 +29,7 @@ const accounts = {
         mecManager.setAddress(accounts[0]);
         mMomoManager.setAddress(accounts[0]);
         rareMomoManager.setAddress(accounts[0]);
+        gemManager.setAddress(accounts[0]);
         dispatch("momoMysteryBox/balanceOfAll", "", { root: true });
         dispatch("mec/balanceOf", "", { root: true });
       }

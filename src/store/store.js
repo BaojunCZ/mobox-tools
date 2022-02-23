@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import accounts from "./modules/accounts";
+import gem from "./modules/gem";
 import mMomo from "./modules/m-momo";
 import mec from "./modules/mec";
 import momoMysteryBox from "./modules/momo-mystery-box";
@@ -12,6 +13,7 @@ const getStore = () => {
   store.registerModule("mec", mec);
   store.registerModule("mMomo", mMomo);
   store.registerModule("rareMomo", rareMomo);
+  store.registerModule("gem", gem);
   return store;
 };
 
