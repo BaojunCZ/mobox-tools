@@ -1,6 +1,8 @@
 import { providers } from "ethers";
 
-export const provider = new providers.Web3Provider(window.ethereum);
+export const provider = new providers.JsonRpcProvider(
+  "https://bsc-dataseed1.ninicoin.io/"
+);
 
 export const MomoMysteryBoxContract =
   "0xed8711fEff83b446158259981FD97645856e82A5";

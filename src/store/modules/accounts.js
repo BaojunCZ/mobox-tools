@@ -8,7 +8,7 @@ const accounts = {
   namespaced: true,
   state: () => ({
     accounts: [],
-    targetAddress: "0x9354666dc1D18bab9d95a7Af6093B077e1Ed20Af",
+    targetAddress: "0xc25249331D6d8152524152b09654bC383c677e58",
   }),
   mutations: {
     updateAccounts(state, accounts) {
